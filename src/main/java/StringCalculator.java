@@ -8,7 +8,7 @@ public class StringCalculator {
         if (numbers.isEmpty())
             return 0;
         else if (numbers.contains(",")) {
-            String[] numArray = numbers.split(",");
+            String[] numArray = numbers.split("[,\n]");
             List<Integer> numList = Arrays.stream(numArray).map(StringCalculator::getAnInt).collect(Collectors.toList());
             return numList.stream().reduce(Integer::sum).get();
         }
