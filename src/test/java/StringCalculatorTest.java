@@ -14,4 +14,9 @@ public class StringCalculatorTest {
         assertEquals(1, StringCalculator.add("1"));
     }
 
+    @Test
+    public void shouldReturnSumForNumberWithCommaDelimiter() {
+        assertEquals(3, StringCalculator.add("1,2"));
+    }
+
 }
