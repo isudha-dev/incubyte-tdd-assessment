@@ -33,4 +33,9 @@ public class StringCalculatorTest {
     public void shoudAllowForCustomDelimiter() {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
+
+    @Test
+    public void shouldAllowForCustomDelimiterWhichAreEscapeChar() {
+        assertEquals(3, StringCalculator.add("//.\n1.2"));
+    }
 }

@@ -22,7 +22,7 @@ public class StringCalculator {
             m.matches();
             String customDelimited = m.group(1);
             numbers = m.group(2);
-            return numbers.split(customDelimited);
+            return numbers.split(Pattern.quote(customDelimited));
         }
         return numbers.split("[,\n]");
     }
