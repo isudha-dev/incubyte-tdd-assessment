@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class StringCalculatorTest {
 
@@ -37,5 +38,15 @@ public class StringCalculatorTest {
     @Test
     public void shouldAllowForCustomDelimiterWhichAreEscapeChar() {
         assertEquals(3, StringCalculator.add("//.\n1.2"));
+    }
+
+    @Test
+    public void shouldThrowExceptionForNegativeNumbers() {
+        try {
+            StringCalculator.add("-1");
+            fail("Expected exception for negative numbers");
+        } catch (RuntimeException ignored) {
+
+        }
     }
 }

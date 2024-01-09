@@ -12,6 +12,9 @@ public class StringCalculator {
         else {
             String[] numArray = getNumbers(numbers);
             List<Integer> numList = Arrays.stream(numArray).map(StringCalculator::getAnInt).collect(Collectors.toList());
+            if (numList.stream().anyMatch(i -> i < 0)) {
+                throw new RuntimeException("negatives not allowed");
+            }
             return numList.stream().reduce(Integer::sum).get();
         }
     }
