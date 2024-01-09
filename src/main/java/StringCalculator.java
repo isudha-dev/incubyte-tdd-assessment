@@ -12,9 +12,13 @@ public class StringCalculator {
         else {
             String[] numArray = getNumbers(numbers);
             List<Integer> numList = Arrays.stream(numArray).map(StringCalculator::getAnInt).collect(Collectors.toList());
-            if (numList.stream().anyMatch(i -> i < 0)) {
-                throw new RuntimeException("negatives not allowed");
+            List<Integer> negativeNumList = numList.stream().filter(i -> i < 0).collect(Collectors.toList());
+
+            if (!negativeNumList.isEmpty()) {
+                List<String> numbersStr = negativeNumList.stream().map(Object::toString).collect(Collectors.toList());
+                throw new RuntimeException("Negatives not allowed: " + String.join(", ", numbersStr));
             }
+
             return numList.stream().reduce(Integer::sum).get();
         }
     }

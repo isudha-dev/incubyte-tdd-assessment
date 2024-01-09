@@ -49,4 +49,13 @@ public class StringCalculatorTest {
 
         }
     }
+
+    @Test
+    public void shouldThrowExceptionWithAppropriateMessageForNegativeNumbers() {
+        try {
+            StringCalculator.add("-1,-2");
+        } catch (RuntimeException e) {
+            assertEquals("Negatives not allowed: -1, -2", e.getMessage());
+        }
+    }
 }
