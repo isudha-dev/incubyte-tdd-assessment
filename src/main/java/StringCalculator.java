@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
@@ -7,12 +9,22 @@ public class StringCalculator {
     public static int add(String numbers) {
         if (numbers.isEmpty())
             return 0;
-        else if (numbers.contains(",")) {
-            String[] numArray = numbers.split("[,\n]");
+        else {
+            String[] numArray = getNumbers(numbers);
             List<Integer> numList = Arrays.stream(numArray).map(StringCalculator::getAnInt).collect(Collectors.toList());
             return numList.stream().reduce(Integer::sum).get();
         }
-        return Integer.parseInt(numbers);
+    }
+
+    private static String[] getNumbers(String numbers) {
+        if (numbers.startsWith("//")) {
+            Matcher m = Pattern.compile("//(.)\n(.*)").matcher(numbers);
+            m.matches();
+            String customDelimited = m.group(1);
+            numbers = m.group(2);
+            return numbers.split(customDelimited);
+        }
+        return numbers.split("[,\n]");
     }
 
     private static int getAnInt(String num) {
